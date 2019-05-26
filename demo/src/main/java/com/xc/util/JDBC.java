@@ -8,18 +8,14 @@ import java.sql.SQLException;
 
 public class JDBC {
     public static String DRIVERNAME = "com.mysql.jdbc.Driver";
-    public static String URL = "jdbc:mysql://localhost:3306/crm";
+    public static String URL = "jdbc:mysql://47.101.41.151:3306/test";
     public static String USER = "root";
-    public static String PASSWORD = "root";
+    public static String PASSWORD = "!xucong981018";
  
     public static Connection conn = null;
  
  
-    public static Connection getConnection() throws Exception {
-        if (conn != null) {
-            return conn;
-        }
-         
+    public static Connection getConnection() throws Exception {     
         Class.forName(DRIVERNAME);
         conn = DriverManager.getConnection(URL, USER, PASSWORD);
  

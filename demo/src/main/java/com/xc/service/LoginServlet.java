@@ -1,6 +1,9 @@
 package com.xc.service;
 
+import java.io.Console;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,12 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.xc.dao.Dao;
+
+import javafx.scene.control.Alert;
+
 public class LoginServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		doPost(req, resp);
 	}
 	
 	@Override
@@ -28,14 +35,26 @@ public class LoginServlet extends HttpServlet {
 //		//对服务器的响应进行重定向到success.jsp文件
 		req.setCharacterEncoding("UTF-8"); 
 		resp.setCharacterEncoding("UTF-8"); 
-		String name = req.getParameter("name");
-		String pass = req.getParameter("pass");
-		if (name.equals("123") && pass.equals("123")) {
-			resp.sendRedirect("main.jsp");
-		}else {
-			System.out.println("登录失败");
+		HttpSession session = req.getSession();
+		Dao dao =new Dao();
+		String uid = req.getParameter("uid");
+		session.setAttribute("id", uid);
+		String pass = req.getParameter("password");
+		try {
+			if (dao.isright(uid, pass)) {
+				resp.sendRedirect("main.jsp");
+			}else {
+				resp.setContentType("text/html; charset=UTF-8"); //转码
+			    PrintWriter out = resp.getWriter();
+			    out.flush();
+			    out.println("<script>");
+			    out.println("alert('此用户名不存在或者密码错误，请重新输入！');");
+			    out.println("history.back();");
+			    out.println("</script>");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	}
-	
-	
+	}	
 }
