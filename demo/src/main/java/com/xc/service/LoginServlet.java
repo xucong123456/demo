@@ -38,7 +38,10 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		Dao dao =new Dao();
 		String uid = req.getParameter("uid");
-		session.setAttribute("id", uid);
+		String uname = dao.returnUnameByuid(uid);
+		String power = dao.returnPowerByuid(uid);
+		session.setAttribute("uname", uname);
+		session.setAttribute("power", power);
 		String pass = req.getParameter("password");
 		try {
 			if (dao.isright(uid, pass)) {

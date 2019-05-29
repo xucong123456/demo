@@ -118,6 +118,36 @@
 		<url-pattern>/deleteposition</url-pattern>
 	</servlet-mapping>
 	
+	<!-- 添加员工 -->
+	<servlet>
+		<servlet-name>addEmployee</servlet-name>
+		<servlet-class>com.xc.service.AddEmployeeService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>addEmployee</servlet-name>
+		<url-pattern>/addEmployee</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 员工查询 -->
+	<servlet>
+		<servlet-name>searchemployee</servlet-name>
+		<servlet-class>com.xc.controller.SearchEmployeesController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>searchemployee</servlet-name>
+		<url-pattern>/searchemployee</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 删除员工 -->
+	<servlet>
+		<servlet-name>deleteemployee</servlet-name>
+		<servlet-class>com.xc.service.DeleteEmployeesService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>deleteemployee</servlet-name>
+		<url-pattern>/deleteemployee</url-pattern>
+	</servlet-mapping>
+	
 	<!-- 添加公告 -->
 	<servlet>
 		<servlet-name>addbulletin</servlet-name>

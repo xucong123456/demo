@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="css/nav.css" rel="stylesheet" type="text/css"/>
 </head>
 <!-- import easyui-css -->
 <link rel="stylesheet" type="text/css" href="themes/default/easyui.css">
@@ -20,6 +21,7 @@
 				$('#tt').tree('expandAll')
 			},
 			onClick : function(node) {
+				$('#img').hide();
 				if (node.attributes) {
 				var  flag = $('#menus').tabs('exists',node.text)
 				if(flag){
@@ -29,6 +31,7 @@
 					//添加新的tab
 					$('#menus').tabs('add',{
 						title: node.text,
+						
 						closable:true,
 						content: "<iframe src='"+node.attributes.menupath+"' frameborder='0' width='100%' height='100%' >"
 					});
@@ -40,9 +43,26 @@
 	})
 </script>
 <body class="easyui-layout">
-	 <div data-options="region:'north',collapsible:false,split:true" style="height:50px;background-color: #5F9EA0">
-	 		<h3 align="center">第六组项目</h3>
-	 </div>
+
+		<%
+			if (session.getAttribute("uname") == null){
+				out.println("<script>");
+			    out.println("alert('请先登录');");
+			    out.println("window.location.href='index.jsp'");
+			    out.println("</script>");
+			}
+		%>
+		
+	 <div data-options="region:'north',collapsible:false,split:true" style="height:60px; background-color: #5F9EA0">
+	 <img alt="" src="images/learners2.png" style="epadding:0;marging:0;float:left; width: 60px;height: 60px">
+	<div>
+		<h3 align="center" style="padding:0;margin-left:450px;float:left;color: white">人力资源管理系统（第六小组）</h3>
+	</div>
+	<ul id="nav"> 
+		<li><a href="index.jsp" onclick="cancel"><img alt="用户图片" src="images/man.png" style="padding-right:5px;">退出登录</a></li>
+		<li><a href="javascript:void(0);" ><img alt="用户图片" src="images/man.png" style="padding-right:5px;">欢迎登录:<%=session.getAttribute("uname") %></a></li> 
+	</ul>
+ </div> 
 	<div data-options="region:'west',title:'人力资源管理系统',collapsible:false"
 		style="width: 200px;background-color: #5F9EA0">
 		<!-- 使用tree组件 -->
@@ -51,8 +71,8 @@
 	<div data-options="region:'center',fit:true"
 		style="padding: 0px; background: #eee;">
 		<!-- 展现tabs -->
-		<div id="menus" class="easyui-tabs" data-options="fit:true" style="width: 500px; height: 250px;">
-				
+		 <img id="img" alt="" src="images/welcome2.jpg" style="epadding:0;marging:0; width: 90%">
+		<div id="menus" class="easyui-tabs" data-options="fit:true,pill:true," style="width: 500px; height: 250px;">			
 		</div>
 
 	</div>
